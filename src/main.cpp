@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 
 int main()
 {
@@ -8,21 +9,35 @@ int main()
   std::cerr << std::unitbuf;
 
   std::cout << "$ ";
-  std::string command;
+  std::string input;
+
   while (true)
   {
-    std::getline(std::cin, command);
+    std::getline(std::cin, input);
+
+    std::string command;
+    std::stringstream ss(input);
+    ss >> command;
+
     if (command == "exit")
     {
       break;
     }
-    else if (command.substr(0, 4) == "echo")
+    else if (command == "echo")
     {
-      std::cout << command.substr(5) << std::endl;
+      std::cout << input.substr(5) << std::endl;
+    }
+    else if (command == "type")
+    {
+      std::string builtin = input.substr(5, 4);
+      if (builtin == "exit" || builtin == "echo")
+      {
+        std::cout << builtin << " is a shell builtin" << std::endl;
+      }
     }
     else
     {
-      std::cout << command << ": command not found" << std::endl;
+      std::cout << input << ": command not found" << std::endl;
     }
 
     std::cout << "$ ";
