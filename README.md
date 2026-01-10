@@ -1,34 +1,120 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/a906cbf3-4d63-4f06-8f40-715366a7b866)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# POSIX Shell
 
-This is a starting point for C++ solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+A lightweight, POSIX-compliant shell implementation written in C++ that provides a robust command-line interface for Unix-like operating systems.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+## Overview
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+This project implements a fully functional shell that interprets and executes commands, manages processes, and provides essential builtin functionality. The shell follows POSIX standards and supports command parsing, process execution, I/O redirection, and interactive command-line operations.
 
-# Passing the first stage
+## Features
 
-The entry point for your `shell` implementation is in `src/main.cpp`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
+- **POSIX Compliance**: Adheres to POSIX shell specifications for compatibility and standardization
+- **Builtin Commands**: Native implementation of `cd`, `pwd`, `echo`, `type`, and `exit`
+- **External Program Execution**: Seamless execution of system binaries and external commands
+- **Command Parsing**: Robust tokenization and parsing of shell commands and arguments
+- **Interactive REPL**: Read-Eval-Print Loop for interactive command execution
+- **Process Management**: Efficient handling of child processes using fork/exec
+- **PATH Resolution**: Automatic command resolution through system PATH directories
 
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
-```
+## Technical Architecture
 
-Time to move on to the next stage!
+The shell operates through a classic REPL architecture:
 
-# Stage 2 & beyond
+1. **Read**: Accepts user input from stdin
+2. **Parse**: Tokenizes input into commands and arguments
+3. **Execute**: Determines command type (builtin vs external) and executes accordingly
+4. **Output**: Displays results and prompts for next command
 
-Note: This section is for stages 2 and beyond.
+## Prerequisites
 
-1. Ensure you have `cmake` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `src/main.cpp`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+- C++17 or higher
+- CMake 3.10+
+- Unix-like operating system (Linux, macOS, BSD)
+- GCC or Clang compiler
+
+## Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/Hawshil/HarShell.git
+cd shell
+
+# Build using the provided script
+chmod +x your_program.sh
+./your_program.sh
+Installation
+bash
+# Create build directory
+mkdir build && cd build
+
+# Configure with CMake
+cmake ..
+
+# Compile
+make
+
+# Install (optional)
+sudo make install
+Usage
+Launch the shell by running the compiled binary:
+
+bash
+./shell
+Example Commands
+bash
+$ pwd
+/home/user
+
+$ echo Hello, World!
+Hello, World!
+
+$ cd /tmp
+$ pwd
+/tmp
+
+$ type echo
+echo is a shell builtin
+
+$ ls -la
+# Lists directory contents using system ls command
+Project Structure
+text
+.
+├── src/
+│   └── main.cpp          # Entry point and main shell loop
+├── CMakeLists.txt        # Build configuration
+├── your_program.sh       # Build and execution script
+└── README.md
+
+Implementation Details
+Builtin Commands
+Builtin commands are executed directly within the shell process without spawning child processes. This provides better performance and access to shell-internal state (like the current working directory).
+
+External Commands
+External programs are executed by:
+
+Searching the PATH environment variable for the executable
+
+Forking a child process
+
+Using execve() to replace the child process with the target program
+
+Waiting for child process completion
+
+Development
+The codebase is structured for maintainability and extensibility:
+
+Modular command handling through function dispatch
+
+Clean separation between builtin and external command execution
+
+Efficient memory management with modern C++ practices
+
+Contributing
+Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+
+Author
+Harshil Jain
+
+Acknowledgments
+Built with reference to POSIX shell specifications and Unix system programming principles.
