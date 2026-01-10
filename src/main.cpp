@@ -30,7 +30,7 @@ int main()
     else if (command == "type")
     {
       std::string builtin = input.substr(5, 4);
-      if (builtin == "exit" || builtin == "echo")
+      if (builtin == "exit" || builtin == "echo" || builtin == "type")
       {
         std::cout << builtin << " is a shell builtin" << std::endl;
       }
