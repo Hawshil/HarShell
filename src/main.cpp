@@ -40,17 +40,15 @@ int main()
     }
     else if (command == "type")
     {
-      std::string builtin = input.substr(5, 4);
+      std::string target = input.substr(5);
 
-      if (builtin == "exit" || builtin == "echo" || builtin == "type")
+      if (target == "exit" || target == "echo" || target == "type")
       {
-        std::cout << builtin << " is a shell builtin" << std::endl;
+        std::cout << target << " is a shell builtin" << std::endl;
       }
       else
       {
         namespace fs = std::filesystem;
-
-        std::string target = input.substr(5);
         const char *path_cstr = std::getenv("PATH");
 
         if (!path_cstr)
@@ -92,18 +90,6 @@ int main()
             std::cout << target << ": not found" << std::endl;
           }
         }
-
-        std::string directories(path_cstr);
-        std::string directory = "";
-        for (int i = 0; i < directories.length(); i++)
-        {
-          if (directories[i] != ':')
-          {
-            directory.push_back(directories[i]);
-          }
-        }
-
-        std::cout << input.substr(5) << ": not found" << std::endl;
       }
     }
     else
