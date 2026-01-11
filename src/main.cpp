@@ -74,7 +74,7 @@ int main()
                     fs::is_regular_file(full_path) &&
                     (fs::status(full_path).permissions() & fs::perms::owner_exec) != fs::perms::none)
                 {
-                  std::cout << target << " is " << full_path << std::endl;
+                  std::cout << target << " is " << full_path.string() << std::endl;
                   found = true;
                   break;
                 }
